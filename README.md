@@ -24,6 +24,8 @@
 
 # EC2 Fundamentals
 
+- Refer. to [ec2-fundamentals](/ec2-fundamentals)
+
 # EC2 - Solution Architect Associate Level
 
 - Refer. to [EC2 - Solution Architect Associate Level](/ec2-solution-architect-associate-level)
