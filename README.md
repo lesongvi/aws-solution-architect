@@ -29,3 +29,7 @@
 # EC2 - Solution Architect Associate Level
 
 - Refer. to [EC2 - Solution Architect Associate Level](/ec2-saa-level)
+
+# EC2 Instance Storage
+
+- Refer. to [ec2-instance-storage](/ec2-instance-storage)
