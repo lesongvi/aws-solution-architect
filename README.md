@@ -28,4 +28,4 @@
 
 # EC2 - Solution Architect Associate Level
 
-- Refer. to [EC2 - Solution Architect Associate Level](/ec2-solution-architect-associate-level)
+- Refer. to [EC2 - Solution Architect Associate Level](/ec2-saa-level)
