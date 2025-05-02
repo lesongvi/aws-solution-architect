@@ -33,3 +33,7 @@
 # EC2 Instance Storage
 
 - Refer. to [ec2-instance-storage](/ec2-instance-storage)
+
+# High Availability and Scalability: ELB & ASG
+
+- Refer. to [high-availability-and-scalability-elb-asg](/high-availability-and-scalability-elb-asg)
