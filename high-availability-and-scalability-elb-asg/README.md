@@ -292,3 +292,88 @@
 ## Elastic Load Balancer - Connection Draining
 
 ![Elastic Load Balancer - Connection Draining](/assets/elastic-load-balancer-connection-draining.png)
+
+## Auto Scaling Groups (ASG) Overview
+
+### What's an Auto Scaling Group?
+
+- In rea life, the load on your websites and application can change
+- In the cloud, you can create and get rid of servers very quickly
+
+- The goal of an Auto Scaling Group (ASG) is to:
+
+  - Scale out (add more EC2 instances) to match an increased load
+  - Scale in (remove EC2 instances) to match a decreased load
+  - Ensure we have a minimum and a maximum number of EC2 instances running at all times
+  - Automatically register new instances to a load balancer
+  - Re-create an EC2 instance in case a previous one is terminated (health check, e.g. if unhealthy)
+
+- ASG are free (you only pay for the underlying EC2 instances running in the ASG)
+
+### Auto Scaling Group in AWS
+
+![Auto Scaling Group in AWS](/assets/auto-scaling-group-in-aws.png)
+
+### Auto Scaling Group in AWS With Load Balancer
+
+![Auto Scaling Group in AWS With Load Balancer](/assets/auto-scaling-group-in-aws-with-load-balancer.png)
+
+### Auto Scaling Group Attributes
+
+![Auto Scaling Group Attributes](/assets/auto-scaling-group-attributes.png)
+
+- A **Launch Template** (older "Launch Configuration" are deprecated):
+  - AMI + Instance Type
+  - EC2 User Data
+  - EBS Volumes
+  - Security Groups
+  - SSH Key Pair
+  - IAM Roles for your EC2 instances
+  - Network + Subnets Information
+  - Load Balancer Information
+- Min Size / Max Size / Initial Capacity
+- Scaling Policies (CPU, Memory, etc.)
+
+### Auto Scaling - CloudWatch Alarms & Scaling Policies
+
+- It is possible to scale an ASG based on CloudWatch Alarms.
+- An alarm monitors a metric (such as **Average CPU Utilization**, or a **custom metric**).
+- _Metrics such as Average CPU are computed for the overall ASG instances, not for each instance._
+- Based on the alarm:
+  - We can create scale out policies (increase the number of instances in the ASG)
+  - We can create scale in policies (decrease the number of instances in the ASG)
+
+![Auto Scaling - CloudWatch Alarms & Scaling Policies](/assets/auto-scaling-cloudwatch-alarms-scaling-policies.png)
+
+## Auto Scaling Groups - Scaling Policies
+
+- Dynamic Scaling:
+  - Target Tracking Scaling:
+    - Simple to setup
+    - Example: I want the average ASG CPU to stay at around 40% (e.g. when CPU > 40% scale out, when CPU < 40% scale in)
+  - Simple / Step Scaling:
+    - When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
+    - When a CloudWatch alarm is triggered (example CPU < 40%), then remove 1 units
+- Scheduled Scaling:
+  - Anticipate a scaling based on known usage patterns
+  - Example: increase the min capacity to 10 at 5 pm on Fridays
+- Predictive Scaling:
+  - Predict the future based on historical data
+  - Example: increase the min capacity to 10 at 5 pm on Fridays, based on historical data
+    ![Auto Scaling Groups - Scaling Policies](/assets/auto-scaling-groups-scaling-policies.png)
+
+### Good metrics to scale on
+
+- **CPUUntilization**: Average CPU utilization cross your ASG instances
+- **RequestCountPerTarget**: to make sure the number of requests per EC2 instances is stable
+- **Average Network In / Out** (if you're application is network bound)
+- **Any custom metric** (that you push using CloudWatch)
+  ![Auto Scaling Groups - Good metrics to scale on](/assets/auto-scaling-groups-good-metrics-to-scale-on.png)
+
+### Auto Scaling Groups - Scaling Cooldowns
+
+- After a scaling activity happens, you are in the **cooldown period** (default 300 seconds).
+- During the cooldown period, the ASG will not launch or terminate additional instances (to allow for metrics to stabilize).
+
+- Advice: Use a ready-to-use AMI to reduce configuration time in order to be serving request faster and reduce the cooldown period.
+  ![Auto Scaling Groups - Scaling Cooldowns](/assets/auto-scaling-groups-scaling-cooldowns.png)
