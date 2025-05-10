@@ -37,3 +37,7 @@
 # High Availability and Scalability: ELB & ASG
 
 - Refer. to [high-availability-and-scalability-elb-asg](/high-availability-and-scalability-elb-asg)
+
+# AWS Fundamentals: RDS + Aurora + ElastiCache
+
+- Refer. to [aws-fundamentals-rds-aurora-elasticache](/aws-fundamentals-rds-aurora-elasticache)
